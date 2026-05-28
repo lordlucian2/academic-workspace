@@ -1,0 +1,6 @@
+openai
+anthropic
+requests
+pydantic
+python-dotenv
+tenacity

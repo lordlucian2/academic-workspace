@@ -1,0 +1,187 @@
+{
+  "title": "Impact of Microplastics on Marine Sediment: Distribution, Dynamics, and Ecological Consequences",
+  "sections": [
+    {
+      "id": "s1",
+      "title": "Introduction",
+      "level": 1,
+      "subsections": [
+        {
+          "id": "s1a",
+          "title": "Background on Microplastic Pollution",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "New Approaches for the Extraction and Identification of Microplastics From Marine Sediment (2017)",
+              "reason": "provides context on prevalence and extraction methods"
+            }
+          ]
+        },
+        {
+          "id": "s1b",
+          "title": "Relevance of Marine Sediment as a Sink",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Deep Sea Microplastic Pollution Extends Out to Sediments in the Northeast Atlantic Ocean Margins (2022)",
+              "reason": "illustrates sediment as a major repository"
+            }
+          ]
+        },
+        {
+          "id": "s1c",
+          "title": "Research Gaps and Objectives",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Contamination of a Benthic Ecosystem in a Deep-Sea Hydrothermal Vent (2024)",
+              "reason": "highlights understudied deep-sea habitats"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Methods",
+      "level": 1,
+      "subsections": [
+        {
+          "id": "s2a",
+          "title": "Sampling Strategies in Sediment Environments",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "New Approaches for the Extraction and Identification of Microplastics From Marine Sediment (2017)",
+              "reason": "details sampling protocols"
+            }
+          ]
+        },
+        {
+          "id": "s2b",
+          "title": "Extraction and Identification Techniques",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastics Pretreatment Method in Marine Organisms and Sediment for Ftir Analysis Using \u201cCylindrical Microplastics Fractionator\u201d (2023)",
+              "reason": "describes advanced FTIR methods"
+            }
+          ]
+        },
+        {
+          "id": "s2c",
+          "title": "Quantitative Analysis of Microplastic Concentrations",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Accumulation in Hong Kongs Marine Sediment: Spatial Pattern and Potential Sources (2025)",
+              "reason": "provides quantitative frameworks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Results and Discussion",
+      "level": 1,
+      "subsections": [
+        {
+          "id": "s3a",
+          "title": "Spatial Distribution Patterns",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Accumulation in Hong Kongs Marine Sediment: Spatial Pattern and Potential Sources (2025)",
+              "reason": "shows spatial variability"
+            }
+          ]
+        },
+        {
+          "id": "s3b",
+          "title": "Sediment Interaction and Sinking Dynamics",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Are the Sinking Velocities of Microplastics Altered Following Interactions With Austrominius modestus and Sediment Particles? (2017)",
+              "reason": "examines sinking velocity changes"
+            }
+          ]
+        },
+        {
+          "id": "s3c",
+          "title": "Ecological Impacts on Benthic Communities",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Contamination of a Benthic Ecosystem in a Hydrothermal Vent (2024)",
+              "reason": "assesses benthic effects"
+            }
+          ]
+        },
+        {
+          "id": "s3d",
+          "title": "Deep-Sea Microplastic Trends",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "High Abundances of Microplastic Pollution in Deep-Sea Sediments: Evidence from Antarctica and the Southern Ocean (2020)",
+              "reason": "provides deep-sea concentration data"
+            }
+          ]
+        },
+        {
+          "id": "s3e",
+          "title": "Comparative Analysis Across Ecosystems",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Pollution in Mangrove Ecosystems of East Java: Water, Sediment, and Wild Crabs (2023)",
+              "reason": "offers comparative ecosystem data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Conclusion and Future Directions",
+      "level": 1,
+      "subsections": [
+        {
+          "id": "s4a",
+          "title": "Key Findings Summarized",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Deep Sea Microplastic Pollution Extends Out to Sediments in the Northeast Atlantic Ocean Margins (2022)",
+              "reason": "summarizes major trends"
+            }
+          ]
+        },
+        {
+          "id": "s4b",
+          "title": "Implications for Marine Management",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Contamination of a Benthic Ecosystem in a Deep-Sea Hydrothermal Vent (2024)",
+              "reason": "links findings to policy"
+            }
+          ]
+        },
+        {
+          "id": "s4c",
+          "title": "Research Gaps and Recommendations",
+          "level": 2,
+          "source_hooks": [
+            {
+              "paper_title": "Microplastic Accumulation in Hong Kongs Marine Sediment: Spatial Pattern and Potential Sources (2025)",
+              "reason": "identifies knowledge gaps"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

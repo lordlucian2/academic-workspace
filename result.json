@@ -1,0 +1,160 @@
+{
+  "prompt": "impact of microplastics on marine sediment",
+  "level": "undergraduate",
+  "timestamp": "2026-05-28T13:10:17.626175",
+  "search_queries": [
+    "microplastics marine sediment impact",
+    "effects of microplastic contamination on benthic communities",
+    "review microplastic pollution in ocean sediments",
+    "recent studies microplastics sedimentary dynamics",
+    "microplastic accumulation in coastal sediment ecosystems"
+  ],
+  "total_papers_fetched": 15,
+  "verified_papers": [
+    {
+      "title": "New Approaches for the Extraction and Identification of Microplastics From Marine Sediment",
+      "authors": [
+        "M. Kedzierski",
+        "V. Le Tilly",
+        "P. Bourseau",
+        "G. C\u00e9sar",
+        "O. Sire",
+        "S. Bruzaud"
+      ],
+      "year": 2017,
+      "doi": "10.1016/b978-0-12-812271-6.00089-2",
+      "url": "https://doi.org/10.1016/b978-0-12-812271-6.00089-2",
+      "citation_count": 1,
+      "venue": "Fate and Impact of Microplastics in Marine Ecosystems",
+      "abstract_preview": "",
+      "reason": "Directly relevant to microplastic extraction in marine sediment; recent (2017)."
+    },
+    {
+      "title": "Are the Sinking Velocities of Microplastics Altered Following Interactions With Austrominius modestus and Sediment Particles?",
+      "authors": [
+        "R. Adams",
+        "R. Thompson"
+      ],
+      "year": 2017,
+      "doi": "10.1016/b978-0-12-812271-6.00097-1",
+      "url": "https://doi.org/10.1016/b978-0-12-812271-6.00097-1",
+      "citation_count": 0,
+      "venue": "Fate and Impact of Microplastics in Marine Ecosystems",
+      "abstract_preview": "",
+      "reason": "Relevant to microplastic behavior in marine sediment; 2017."
+    },
+    {
+      "title": "Microplastics Pretreatment Method in Marine Organisms and Sediment for Ftir Analysis Using \u201cCylindrical Microplastics Fractionator\u201d",
+      "authors": [
+        "Hiraku Tanoiri",
+        "Eduardo  Estevan Barrientos",
+        "Haruka Nakano",
+        "Hisayuki Arakawa",
+        "Masashi Yokota"
+      ],
+      "year": 2023,
+      "doi": "10.2139/ssrn.4539738",
+      "url": "https://doi.org/10.2139/ssrn.4539738",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Methodology for microplastic analysis in marine sediment; recent (2023)."
+    },
+    {
+      "title": "Microplastic Contamination of a Benthic Ecosystem in a Hydrothermal Vent",
+      "authors": [
+        "Unknown"
+      ],
+      "year": 2024,
+      "doi": "10.1021/acs.est.4c02811.s001",
+      "url": "https://doi.org/10.1021/acs.est.4c02811.s001",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Studies microplastic presence in marine sediment (vent ecosystem); 2024."
+    },
+    {
+      "title": "Microplastic Contamination of a Benthic Ecosystem in a Deep-Sea Hydrothermal Vent",
+      "authors": [
+        "Byeongyong Park",
+        "Boongho Cho",
+        "Jaemin Cho",
+        "Seungho Kim",
+        "Tae Won Kim"
+      ],
+      "year": 2024,
+      "doi": "10.5194/egusphere-egu24-1815",
+      "url": "https://doi.org/10.5194/egusphere-egu24-1815",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "<jats:p>Plastic contamination is a global pervasive issue, extending from coastal areas and open oceans to polar regions and even the deep sea. Microplastic contamination in hydrothermal vents, which ",
+      "reason": "Relevant to deep-sea marine sediment; 2024."
+    },
+    {
+      "title": "Deep Sea Microplastic Pollution Extends Out to Sediments in the Northeast Atlantic Ocean Margins",
+      "authors": [
+        "Unknown"
+      ],
+      "year": 2022,
+      "doi": "10.1021/acs.est.2c05926.s001",
+      "url": "https://doi.org/10.1021/acs.est.2c05926.s001",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Directly addresses microplastic in marine sediment; 2022."
+    },
+    {
+      "title": "Deep Sea Microplastic Pollution Extends Out to Sediments in the Northeast Atlantic Ocean Margins",
+      "authors": [
+        "Unknown"
+      ],
+      "year": 2022,
+      "doi": "10.1021/acs.est.2c05926.s001",
+      "url": "https://doi.org/10.1021/acs.est.2c05926.s001",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Duplicate entry but still relevant; 2022."
+    },
+    {
+      "title": "High Abundances of Microplastic Pollution in Deep-Sea Sediments: Evidence from Antarctica and the Southern Ocean",
+      "authors": [
+        "Unknown"
+      ],
+      "year": 2020,
+      "doi": "10.1021/acs.est.0c03441.s001",
+      "url": "https://doi.org/10.1021/acs.est.0c03441.s001",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Relevant to marine sediment microplastic; 2020."
+    },
+    {
+      "title": "Microplastic Accumulation in Hong Kongs Marine Sediment: Spatial Pattern and Potential Sources",
+      "authors": [
+        "Unknown"
+      ],
+      "year": 2025,
+      "doi": "10.1021/envhealth.5c00066.s001",
+      "url": "https://doi.org/10.1021/envhealth.5c00066.s001",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Directly relevant to marine sediment microplastic; 2025."
+    },
+    {
+      "title": "Microplastic Pollution in Mangrove Ecosystems of East Java: Water, Sediment, and Wild Crabs",
+      "authors": [
+        "Viky Vidayanti",
+        "Catur Retnaningdyah"
+      ],
+      "year": 2023,
+      "doi": "10.2139/ssrn.4656236",
+      "url": "https://doi.org/10.2139/ssrn.4656236",
+      "citation_count": 0,
+      "venue": "Unknown",
+      "abstract_preview": "",
+      "reason": "Includes marine sediment analysis; 2023."
+    }
+  ]
+}
