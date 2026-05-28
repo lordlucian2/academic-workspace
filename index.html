@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Workspace | AI Research Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subhead {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #764ba2;
+            padding-left: 1rem;
+        }
+
+        textarea, select, button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        textarea:focus, select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .outline-container {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        .outline-container h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .source-badge {
+            background: #e2e8f0;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #764ba2;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>📚 Academic Workspace</h1>
+        <div class="subhead">
+            Turn research questions into structured outlines with verified sources.
+        </div>
+
+        <textarea id="prompt" rows="4" placeholder="Enter your research question or topic... e.g., 'The impact of microplastics on marine sediment ecosystems'"></textarea>
+
+        <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+            <select id="level" style="width: 50%;">
+                <option value="highschool">🏫 High School</option>
+                <option value="undergraduate" selected>🎓 Undergraduate</option>
+                <option value="graduate">📖 Graduate</option>
+            </select>
+            <select id="assignment_type" style="width: 50%;">
+                <option value="essay">✍️ Essay</option>
+                <option value="research paper" selected>🔬 Research Paper</option>
+                <option value="report">📊 Report</option>
+            </select>
+        </div>
+
+        <button id="generateBtn">✨ Generate Outline & Sources</button>
+
+        <div id="result" style="display: none;">
+            <div class="outline-container">
+                <h2>📋 Generated Outline</h2>
+                <pre id="outlineContent" style="font-family: monospace; font-size: 0.875rem; white-space: pre-wrap;"></pre>
+                <hr style="margin: 1rem 0;">
+                <button id="docBtn" style="background: #10b981;">📄 Generate Full Document</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_BASE = "https://academic-workspace.onrender.com";
+    let currentOutline = null;
+    let currentSources = null;
+
+    const generateBtn = document.getElementById('generateBtn');
+    const resultDiv = document.getElementById('result');
+    const outlineContent = document.getElementById('outlineContent');
+    const docBtn = document.getElementById('docBtn');
+
+    generateBtn.onclick = async () => {
+        const prompt = document.getElementById('prompt').value.trim();
+        if (!prompt) {
+            alert('Please enter a research prompt.');
+            return;
+        }
+
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="loading"></span> Generating outline...';
+
+        try {
+            const res = await fetch(`${API_BASE}/generate-outline`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    level: document.getElementById('level').value,
+                    assignment_type: document.getElementById('assignment_type').value
+                })
+            });
+
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+
+            currentOutline = data.outline;
+            currentSources = data.sources;
+
+            outlineContent.textContent = JSON.stringify(currentOutline, null, 2);
+            resultDiv.style.display = 'block';
+        } catch (err) {
+            alert('Error: ' + err.message);
+        } finally {
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '✨ Generate Outline & Sources';
+        }
+    };
+
+    docBtn.onclick = async () => {
+        if (!currentOutline || !currentSources) {
+            alert('No outline found. Generate one first.');
+            return;
+        }
+
+        docBtn.disabled = true;
+        docBtn.innerHTML = '<span class="loading"></span> Generating document...';
+
+        try {
+            const res = await fetch(`${API_BASE}/generate-document`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    outline: currentOutline,
+                    sources: currentSources,
+                    prompt: document.getElementById('prompt').value,
+                    level: document.getElementById('level').value,
+                    assignment_type: document.getElementById('assignment_type').value
+                })
+            });
+
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+
+            // Open document in new tab
+            const win = window.open();
+            win.document.write(`<html><head><title>Academic Document</title></head><body><pre style="font-family: monospace; white-space: pre-wrap; padding: 2rem;">${escapeHtml(data.document)}</pre></body></html>`);
+        } catch (err) {
+            alert('Error generating document: ' + err.message);
+        } finally {
+            docBtn.disabled = false;
+            docBtn.innerHTML = '📄 Generate Full Document';
+        }
+    };
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+</script>
+</body>
+</html>
