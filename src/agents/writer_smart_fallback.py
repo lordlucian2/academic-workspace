@@ -8,16 +8,13 @@ def clean_abstract(text: str) -> str:
     """Remove XML/HTML tags and decode HTML entities."""
     if not text or text == "No abstract available.":
         return ""
-    # Remove XML/HTML tags like <jats:p>, </jats:p>, etc.
     text = re.sub(r'<[^>]+>', ' ', text)
-    # Decode HTML entities like &amp;lt; -> <, &amp;gt; -> >, etc.
     text = html.unescape(text)
-    # Collapse multiple spaces and strip
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
 def extract_key_sentences(abstract: str, max_sentences: int = 2) -> str:
-    """Extract first few sentences from cleaned abstract."""
+    """Extract first few sentences from cleaned abstract, return empty if none."""
     cleaned = clean_abstract(abstract)
     if not cleaned:
         return ""
@@ -30,7 +27,7 @@ def extract_key_sentences(abstract: str, max_sentences: int = 2) -> str:
 def format_citation(paper: VerifiedPaper) -> str:
     """Format citation: Author (Year)"""
     if paper.authors and paper.authors[0]:
-        author = paper.authors[0].split()[-1]  # last name
+        author = paper.authors[0].split()[-1]
     else:
         author = "Author"
     return f"{author} ({paper.year})"
@@ -40,7 +37,7 @@ def write_subsection_smart(
     section_title: str,
     papers: List[VerifiedPaper]
 ) -> str:
-    """Generate content using cleaned source abstracts."""
+    """Generate content using available abstract or fallback to title."""
     if not subsection.source_hooks:
         return f"\n\n### {subsection.title}\n\n*No sources available for this section.*\n\n"
     
@@ -60,9 +57,11 @@ def write_subsection_smart(
             if key_sent:
                 sentences.append(f"According to {citation}, {key_sent[0].lower() + key_sent[1:] if key_sent else ''}")
             else:
-                title_short = matched.title[:80]
-                sentences.append(f"{citation} studied \"{title_short}\", which is directly relevant to {hook.reason.lower()}.")
+                # No abstract: use title to generate a meaningful sentence
+                title_short = matched.title[:100]
+                sentences.append(f"{citation} discussed the topic in \"{title_short}\", providing relevant insights for this subsection.")
         else:
+            # No matching paper found in the papers list
             sentences.append(f"A relevant source indicates that {hook.reason.lower()}.")
     
     paragraph = ' '.join(sentences)
@@ -73,7 +72,6 @@ def generate_document_smart(
     outline: Outline,
     papers: List[VerifiedPaper]
 ) -> str:
-    """Generate full document using smart fallback with cleaned abstracts."""
     doc = f"# {outline.title}\n\n---\n\n"
     for section in outline.sections:
         doc += f"## {section.title}\n\n"
