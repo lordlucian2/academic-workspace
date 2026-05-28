@@ -5,7 +5,6 @@ from src.models.schemas import VerifiedPaper
 from src.agents.outline_architect import Outline, OutlineSubsection, SourceHook
 
 def clean_abstract(text: str) -> str:
-    """Remove XML/HTML tags and decode HTML entities."""
     if not text or text == "No abstract available.":
         return ""
     text = re.sub(r'<[^>]+>', ' ', text)
@@ -13,19 +12,7 @@ def clean_abstract(text: str) -> str:
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
-def extract_key_sentences(abstract: str, max_sentences: int = 2) -> str:
-    """Extract first few sentences from cleaned abstract, return empty if none."""
-    cleaned = clean_abstract(abstract)
-    if not cleaned:
-        return ""
-    sentences = re.split(r'(?<=\.)\s+', cleaned)
-    key = '. '.join(sentences[:max_sentences]).strip()
-    if key and not key.endswith('.'):
-        key += '.'
-    return key
-
 def format_citation(paper: VerifiedPaper) -> str:
-    """Format citation: Author (Year)"""
     if paper.authors and paper.authors[0]:
         author = paper.authors[0].split()[-1]
     else:
@@ -37,7 +24,6 @@ def write_subsection_smart(
     section_title: str,
     papers: List[VerifiedPaper]
 ) -> str:
-    """Generate content using available abstract or fallback to title."""
     if not subsection.source_hooks:
         return f"\n\n### {subsection.title}\n\n*No sources available for this section.*\n\n"
     
@@ -51,18 +37,18 @@ def write_subsection_smart(
             if p.title == hook.paper_title or hook.paper_title in p.title or p.title in hook.paper_title:
                 matched = p
                 break
+        
+        citation = "A relevant study"
+        title_part = ""
+        
         if matched:
             citation = format_citation(matched)
-            key_sent = extract_key_sentences(matched.abstract, max_sentences=1)
-            if key_sent:
-                sentences.append(f"According to {citation}, {key_sent[0].lower() + key_sent[1:] if key_sent else ''}")
-            else:
-                # No abstract: use title to generate a meaningful sentence
-                title_short = matched.title[:100]
-                sentences.append(f"{citation} discussed the topic in \"{title_short}\", providing relevant insights for this subsection.")
+            title_part = f" \"{matched.title[:80]}\""
         else:
-            # No matching paper found in the papers list
-            sentences.append(f"A relevant source indicates that {hook.reason.lower()}.")
+            title_part = f" on \"{hook.paper_title[:80]}\""
+        
+        # Always produce a sentence, regardless of abstract availability
+        sentences.append(f"{citation} examined{title_part}, providing insights into {hook.reason.lower()}.")
     
     paragraph = ' '.join(sentences)
     paragraph = paragraph.replace('. ', '.\n\n')
