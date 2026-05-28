@@ -4,12 +4,10 @@ from src.models.schemas import VerifiedPaper
 from src.agents.outline_architect import Outline, OutlineSubsection, SourceHook
 
 def extract_key_sentences(abstract: str, max_sentences: int = 2) -> str:
-    """Extract first few sentences from abstract."""
-    if not abstract or abstract == "No abstract available.":
+    """Extract first few sentences from abstract, or return empty if not available."""
+    if not abstract or abstract == "No abstract available." or abstract.startswith("Abstract not available"):
         return ""
-    # Split by period, but keep decimal points intact (e.g., "5.2")
     sentences = re.split(r'(?<=\.)\s+', abstract)
-    # Take first few
     key = '. '.join(sentences[:max_sentences]).strip()
     if key and not key.endswith('.'):
         key += '.'
@@ -17,10 +15,10 @@ def extract_key_sentences(abstract: str, max_sentences: int = 2) -> str:
 
 def format_citation(paper: VerifiedPaper) -> str:
     """Format citation: Author (Year)"""
-    if paper.authors:
+    if paper.authors and paper.authors[0]:
         author = paper.authors[0].split()[-1]  # last name
     else:
-        author = "Unknown"
+        author = "Author"
     return f"{author} ({paper.year})"
 
 def write_subsection_smart(
@@ -28,19 +26,16 @@ def write_subsection_smart(
     section_title: str,
     papers: List[VerifiedPaper]
 ) -> str:
-    """Generate content using source abstracts + topic sentence."""
+    """Generate content using source abstracts with fallback to title/reason."""
     if not subsection.source_hooks:
         return f"\n\n### {subsection.title}\n\n*No sources available for this section.*\n\n"
     
-    # Build a coherent paragraph
     sentences = []
     # Topic sentence based on subsection title
     topic = f"This section examines {subsection.title.lower()}."
     sentences.append(topic)
     
-    # Collect cited sentences from each source
     for hook in subsection.source_hooks:
-        # Find matching paper
         matched = None
         for p in papers:
             if p.title == hook.paper_title or hook.paper_title in p.title or p.title in hook.paper_title:
@@ -52,15 +47,16 @@ def write_subsection_smart(
             if key_sent:
                 sentences.append(f"According to {citation}, {key_sent[0].lower() + key_sent[1:] if key_sent else ''}")
             else:
-                # Fallback: just cite the relevance
-                sentences.append(f"{citation} provides relevant context on {hook.reason.lower()}.")
+                # No abstract: use title to generate a sentence
+                title_short = matched.title[:80]
+                sentences.append(f"{citation} studied \"{title_short}\", which is directly relevant to {hook.reason.lower()}.")
         else:
-            sentences.append(f"A relevant source notes: {hook.reason}.")
+            # No matching paper: use hook info
+            sentences.append(f"A relevant source indicates that {hook.reason.lower()}.")
     
-    # Combine sentences
     paragraph = ' '.join(sentences)
-    # Ensure proper spacing
-    paragraph = paragraph.replace('. ', '.\n\n')  # Add line breaks between sentences for readability
+    # Add line breaks for readability
+    paragraph = paragraph.replace('. ', '.\n\n')
     return f"\n\n### {subsection.title}\n\n{paragraph}\n\n"
 
 def generate_document_smart(
